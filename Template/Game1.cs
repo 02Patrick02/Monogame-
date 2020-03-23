@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
@@ -13,9 +13,9 @@ namespace Template
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Texture2D Spelare1, skott;
-        Vector2 Spelare1Pos, skottpos;
-        Rectangle StorlekSpelare1;
+        Texture2D Spelare1, skott, spelare2;
+        Vector2 Spelare1pos, skottpos;
+        Rectangle Spelare1storlek;
 
         List<Vector2> Spelare1SkottPos = new List<Vector2>();
 
@@ -39,7 +39,7 @@ namespace Template
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            Spelare1Pos = new Vector2(300, 200);
+            Spelare1pos = new Vector2(300, 200);
             skottpos = new Vector2(37, 33);
             Spelare1SkottPos = new List<Vector2>();
             base.Initialize();
@@ -83,23 +83,23 @@ namespace Template
 
                 Exit();
 
-            StorlekSpelare1 = new Rectangle((int)Spelare1Pos.X, (int)Spelare1Pos.Y, 100, 85);
+            Spelare1storlek = new Rectangle((int)Spelare1pos.X, (int)Spelare1pos.Y, 100, 85);
             kNewstate = Keyboard.GetState();
             KeyboardState a = Keyboard.GetState();
 
             if (kNewstate.IsKeyDown(Keys.Right))
-                Spelare1Pos.X += 10;
+                Spelare1pos.X += 10;
             if (a.IsKeyDown(Keys.Left))
-                Spelare1Pos.X -= 10;
+                Spelare1pos.X -= 10;
             if (a.IsKeyDown(Keys.Up))
-                Spelare1Pos.Y -= 10;
+                Spelare1pos.Y -= 10;
             if (a.IsKeyDown(Keys.Down))
-                Spelare1Pos.Y += 10;
+                Spelare1pos.Y += 10;
 
 
             if (a.IsKeyDown(Keys.Space) && kOldstate.IsKeyUp(Keys.Space))
             {
-                Spelare1SkottPos.Add(Spelare1Pos + skottpos);
+                Spelare1SkottPos.Add(Spelare1pos + skottpos);
             }
             for (int i = 0; i < Spelare1SkottPos.Count; i++)
             {
@@ -125,7 +125,7 @@ namespace Template
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-            spriteBatch.Draw(Spelare1, StorlekSpelare1, Color.White);
+            spriteBatch.Draw(Spelare1, Spelare1storlek, Color.White);
 
             foreach (Vector2 bulletPos in Spelare1SkottPos)
             {
@@ -156,3 +156,4 @@ namespace Template
         }
     }
 }
+
